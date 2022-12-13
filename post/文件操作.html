@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"metosakura.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1）pwd用于查看当前所在目录 2）ls用于查看当前目录下具体有哪些文件和目录 3）cd使用cd操作可以使我们进入不同的目录中  从图中我们可以看到$前的符号发生了改变，它会随着我们进入目录的变化而发生变化，如“~”代表的是此时登录的用户目录，而“cd &#x2F;”以后进入的则是根目录  进入其他目录的方法：绝对路径法：					 	相对路径法： cd ..：返回上一级目录cd ~：回到自己的家目录 4)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件操作">
+<meta property="og:url" content="http://metosakura.github.io/post/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1）pwd用于查看当前所在目录 2）ls用于查看当前目录下具体有哪些文件和目录 3）cd使用cd操作可以使我们进入不同的目录中  从图中我们可以看到$前的符号发生了改变，它会随着我们进入目录的变化而发生变化，如“~”代表的是此时登录的用户目录，而“cd &#x2F;”以后进入的则是根目录  进入其他目录的方法：绝对路径法：					 	相对路径法： cd ..：返回上一级目录cd ~：回到自己的家目录 4)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991397923-eb225b2e-d9c8-4604-928c-076a80967d0a.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=38&amp;id=u3c5b3c84&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=57&amp;originWidth=591&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=12110&amp;status=error&amp;style=none&amp;taskId=u2909c465-b102-40a2-a215-c1682866c4f&amp;title=&amp;width=394">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991484397-13c1c83b-ef07-4bcd-83ec-72b9b2e531aa.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=86&amp;id=uae06a3a8&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=129&amp;originWidth=1114&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=28159&amp;status=error&amp;style=none&amp;taskId=u4ea442f7-9389-4f06-b48e-35bcc233f07&amp;title=&amp;width=742.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991821175-cc23721b-978c-463a-9078-51a9a6a74442.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=103&amp;id=uc21ca8ff&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=155&amp;originWidth=608&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=28075&amp;status=error&amp;style=none&amp;taskId=u4274bc03-370b-4c63-a611-3bc65de295e&amp;title=&amp;width=405.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666002702411-4fe5f3b2-d455-4469-98ea-8f5083d9bec7.png#crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=url&amp;id=slf5R&amp;margin=%5Bobject%20Object%5D&amp;originHeight=70&amp;originWidth=866&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666002790796-d7cd9e73-cd79-4644-91b4-5710e22d9df0.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=50&amp;id=u3aa1e9f4&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=75&amp;originWidth=783&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=20927&amp;status=error&amp;style=none&amp;taskId=u56341774-ce32-4e43-a1ee-6204a9fd8ad&amp;title=&amp;width=522">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666003538263-a3fa8d85-0fcc-49b3-8e2a-d9db2be2b7af.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=123&amp;id=u2da31f44&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=185&amp;originWidth=1115&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=46452&amp;status=error&amp;style=none&amp;taskId=u742f76ff-fd16-4260-bf13-624580a67b2&amp;title=&amp;width=743.3333333333334">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666003832554-30fde534-6c2a-4966-8807-770eb2e88930.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=128&amp;id=uc3efbde2&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=192&amp;originWidth=1111&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=46771&amp;status=error&amp;style=none&amp;taskId=ud07c2ef0-37c7-4086-a33f-2e88ac74287&amp;title=&amp;width=740.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666004182656-f9f86e31-e033-45a1-84fb-8ed462655e7d.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=129&amp;id=u1ad5b130&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=193&amp;originWidth=1183&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=48265&amp;status=error&amp;style=none&amp;taskId=u91ea0ae0-bf63-42d1-8c04-9d4d7f7a424&amp;title=&amp;width=788.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666004220519-a3f5e7c0-826c-4235-8640-84e1283a6ff3.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=62&amp;id=ue27b3f1e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=93&amp;originWidth=587&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=18416&amp;status=error&amp;style=none&amp;taskId=u5f342d26-df1b-4a27-98ce-fe2b0c5e385&amp;title=&amp;width=391.3333333333333">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666005060153-9cf2a83a-5f38-4928-9ac8-fc7094c3ae7f.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=83&amp;id=uaa7bfc72&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=124&amp;originWidth=786&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=34085&amp;status=error&amp;style=none&amp;taskId=u0d1dbeab-5167-4920-a6b3-7e54a511c61&amp;title=&amp;width=524">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666006330103-7d8f8128-5822-4131-b3d5-a7f6dc4ec550.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=63&amp;id=u613f1f52&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=94&amp;originWidth=726&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=23104&amp;status=error&amp;style=none&amp;taskId=u35deed51-9459-4dce-b583-7ce72703e59&amp;title=&amp;width=484">
+<meta property="article:published_time" content="2022-12-13T16:25:25.248Z">
+<meta property="article:modified_time" content="2022-12-13T16:25:56.449Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991397923-eb225b2e-d9c8-4604-928c-076a80967d0a.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=38&amp;id=u3c5b3c84&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=57&amp;originWidth=591&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=12110&amp;status=error&amp;style=none&amp;taskId=u2909c465-b102-40a2-a215-c1682866c4f&amp;title=&amp;width=394">
+
+<link rel="canonical" href="http://metosakura.github.io/post/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>文件操作 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://metosakura.github.io/post/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文件操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-12-14 00:25:25 / Modified: 00:25:56" itemprop="dateCreated datePublished" datetime="2022-12-14T00:25:25+08:00">2022-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="1）pwd"><a href="#1）pwd" class="headerlink" title="1）pwd"></a>1）pwd</h4><p>用于查看当前所在目录<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991397923-eb225b2e-d9c8-4604-928c-076a80967d0a.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=38&amp;id=u3c5b3c84&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=57&amp;originWidth=591&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=12110&amp;status=error&amp;style=none&amp;taskId=u2909c465-b102-40a2-a215-c1682866c4f&amp;title=&amp;width=394" alt="image.png"></p>
+<h4 id="2）ls"><a href="#2）ls" class="headerlink" title="2）ls"></a>2）ls</h4><p>用于查看当前目录下具体有哪些文件和目录<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991484397-13c1c83b-ef07-4bcd-83ec-72b9b2e531aa.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=86&amp;id=uae06a3a8&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=129&amp;originWidth=1114&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=28159&amp;status=error&amp;style=none&amp;taskId=u4ea442f7-9389-4f06-b48e-35bcc233f07&amp;title=&amp;width=742.6666666666666" alt="image.png"></p>
+<h4 id="3）cd"><a href="#3）cd" class="headerlink" title="3）cd"></a>3）cd</h4><p>使用cd操作可以使我们进入不同的目录中<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1665991821175-cc23721b-978c-463a-9078-51a9a6a74442.png#clientId=ue32e2e94-e814-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=103&amp;id=uc21ca8ff&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=155&amp;originWidth=608&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=28075&amp;status=error&amp;style=none&amp;taskId=u4274bc03-370b-4c63-a611-3bc65de295e&amp;title=&amp;width=405.3333333333333" alt="image.png"></p>
+<blockquote>
+<p>从图中我们可以看到$前的符号发生了改变，它会随着我们进入目录的变化而发生变化，如“~”代表的是此时登录的用户目录，而“cd /”以后进入的则是根目录</p>
+</blockquote>
+<p>进入其他目录的方法：<br>绝对路径法：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666002702411-4fe5f3b2-d455-4469-98ea-8f5083d9bec7.png#crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=url&amp;id=slf5R&amp;margin=%5Bobject%20Object%5D&amp;originHeight=70&amp;originWidth=866&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;title=">					 <br>	相对路径法：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666002790796-d7cd9e73-cd79-4644-91b4-5710e22d9df0.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=50&amp;id=u3aa1e9f4&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=75&amp;originWidth=783&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=20927&amp;status=error&amp;style=none&amp;taskId=u56341774-ce32-4e43-a1ee-6204a9fd8ad&amp;title=&amp;width=522" alt="image.png"></p>
+<p>cd ..：返回上一级目录<br>cd ~：回到自己的家目录</p>
+<h4 id="4-mkdir（创建新目录）"><a href="#4-mkdir（创建新目录）" class="headerlink" title="4)mkdir（创建新目录）"></a>4)mkdir（创建新目录）</h4><p>mkdir + 目录名称<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666003538263-a3fa8d85-0fcc-49b3-8e2a-d9db2be2b7af.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=123&amp;id=u2da31f44&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=185&amp;originWidth=1115&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=46452&amp;status=error&amp;style=none&amp;taskId=u742f76ff-fd16-4260-bf13-624580a67b2&amp;title=&amp;width=743.3333333333334" alt="image.png"></p>
+<h4 id="5-rmdir及rm-rf"><a href="#5-rmdir及rm-rf" class="headerlink" title="5)rmdir及rm -rf"></a>5)rmdir及rm -rf</h4><p>rmdir 及 rm -rf 都是用于删除操作，区别在于，rmdir只能用于删除空的目录，而rm -rf则能够既能删除空目录，也能删除含有其他目录或文件的目录（注意，rm -rf 在删除该目录时会把该目录下的所有目录及文件都删除） <br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666003832554-30fde534-6c2a-4966-8807-770eb2e88930.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=128&amp;id=uc3efbde2&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=192&amp;originWidth=1111&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=46771&amp;status=error&amp;style=none&amp;taskId=ud07c2ef0-37c7-4086-a33f-2e88ac74287&amp;title=&amp;width=740.6666666666666" alt="image.png"></p>
+<h4 id="6）mv（移动文件或目录）"><a href="#6）mv（移动文件或目录）" class="headerlink" title="6）mv（移动文件或目录）"></a>6）mv（移动文件或目录）</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666004182656-f9f86e31-e033-45a1-84fb-8ed462655e7d.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=129&amp;id=u1ad5b130&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=193&amp;originWidth=1183&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=48265&amp;status=error&amp;style=none&amp;taskId=u91ea0ae0-bf63-42d1-8c04-9d4d7f7a424&amp;title=&amp;width=788.6666666666666" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666004220519-a3f5e7c0-826c-4235-8640-84e1283a6ff3.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=62&amp;id=ue27b3f1e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=93&amp;originWidth=587&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=18416&amp;status=error&amp;style=none&amp;taskId=u5f342d26-df1b-4a27-98ce-fe2b0c5e385&amp;title=&amp;width=391.3333333333333" alt="image.png"></p>
+<h4 id="7）touch（创建文件）"><a href="#7）touch（创建文件）" class="headerlink" title="7）touch（创建文件）"></a>7）touch（创建文件）</h4><p>直接 touch + 文件名，如：touch index.html</p>
+<blockquote>
+<p>注意，Linux很多文件都不需要拓展名，文件的类型由文件的属性决定。在每一个文件（包括图片，视频或其他的非ASCII文件）的开头都有一片区域来显示这个文件的实际用法，这就是文件头标志。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666005060153-9cf2a83a-5f38-4928-9ac8-fc7094c3ae7f.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=83&amp;id=uaa7bfc72&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=124&amp;originWidth=786&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=34085&amp;status=error&amp;style=none&amp;taskId=u0d1dbeab-5167-4920-a6b3-7e54a511c61&amp;title=&amp;width=524" alt="image.png"></p>
+<h4 id="8）vi-x2F-vim（文件的编辑）及cat（查看文件内容）"><a href="#8）vi-x2F-vim（文件的编辑）及cat（查看文件内容）" class="headerlink" title="8）vi/vim（文件的编辑）及cat（查看文件内容）"></a>8）vi/vim（文件的编辑）及cat（查看文件内容）</h4><p>通过 vim/vi + 文件名称 进入编辑，若想修改文件则按 “i”，进入编辑模式，若要退出则先按”esc”退出编辑模式，再按”:wq”保存并退出。</p>
+<blockquote>
+<p>退出的方式有若干种，:wq	:wq!		:x<br>其中”:wq”与”:wq!”区别在于，”:wq!”对于一些设为仅读的文件也能更改<br>而”:wq”与”:x”区别在于，”:wq”若是未修改文件也会更改文件修改时间，但是”:x”则只会在文件有修改才会更改文件修改时间</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1666006330103-7d8f8128-5822-4131-b3d5-a7f6dc4ec550.png#clientId=uf6b11d6e-87bb-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=63&amp;id=u613f1f52&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=94&amp;originWidth=726&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=23104&amp;status=error&amp;style=none&amp;taskId=u35deed51-9459-4dce-b583-7ce72703e59&amp;title=&amp;width=484" alt="image.png"><br>（所展示的结果是通过修改后的index.html显示的内容）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/Git%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html" rel="prev" title="Git的基础操作">
+      <i class="fa fa-chevron-left"></i> Git的基础操作
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%89pwd"><span class="nav-number">1.</span> <span class="nav-text">1）pwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%89ls"><span class="nav-number">2.</span> <span class="nav-text">2）ls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%EF%BC%89cd"><span class="nav-number">3.</span> <span class="nav-text">3）cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-mkdir%EF%BC%88%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">4)mkdir（创建新目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-rmdir%E5%8F%8Arm-rf"><span class="nav-number">5.</span> <span class="nav-text">5)rmdir及rm -rf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6%EF%BC%89mv%EF%BC%88%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">6）mv（移动文件或目录）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7%EF%BC%89touch%EF%BC%88%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">7）touch（创建文件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8%EF%BC%89vi-x2F-vim%EF%BC%88%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E8%BE%91%EF%BC%89%E5%8F%8Acat%EF%BC%88%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">8）vi&#x2F;vim（文件的编辑）及cat（查看文件内容）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"metosakura.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、本地仓库的创建与操作1.版本库的创建 版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。  1.进入到目标目录 采用cd + “目标目录”&lt;br &#x2F;&gt;![image.png](https:&#x2F;&#x2F;cdn.nlark.com&#x2F;yu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git的基础操作">
+<meta property="og:url" content="http://metosakura.github.io/post/Git%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、本地仓库的创建与操作1.版本库的创建 版本库又名仓库，英文名repository，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。  1.进入到目标目录 采用cd + “目标目录”&lt;br &#x2F;&gt;![image.png](https:&#x2F;&#x2F;cdn.nlark.com&#x2F;yu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664173457233-8f3bac2e-73da-4964-97b3-bd6b25e668d9.png#clientId=u001af5af-791f-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=151&amp;id=u10316498&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=227&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17847&amp;status=error&amp;style=none&amp;taskId=ue119a302-28a0-47b8-96c6-fa5ea49d058&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178534381-d6b69bac-d8a9-4523-8e72-84e3d40f8f1e.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=295&amp;id=u454e410d&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=443&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=35287&amp;status=error&amp;style=none&amp;taskId=uf747b831-73e7-467f-9ef6-51703400191&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178042560-0f8461ba-fbf8-49e2-9a4e-688fb72df2d4.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=164&amp;id=ufca0509d&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=246&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=24043&amp;status=error&amp;style=none&amp;taskId=u8007624e-b23f-45e2-87f2-e9794e5636e&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178234970-04b0f6e3-b1be-4d7b-b13c-a5226c48b45b.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=152&amp;id=u85f0562f&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=228&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=21503&amp;status=error&amp;style=none&amp;taskId=u09e6eeff-5c61-4a7c-92ba-28cfc7c5c7e&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178879957-8c230ea1-11eb-4d1e-b26f-5ee505a5226c.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=263&amp;id=ub141a65e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=394&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=37880&amp;status=error&amp;style=none&amp;taskId=ucf9fbb26-380a-4549-a286-540820b3a67&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179182219-ae57965b-3de9-4308-8159-05e849c1277a.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=125&amp;id=u78ef5bd9&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=188&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=19126&amp;status=error&amp;style=none&amp;taskId=u7fc73134-4b29-4076-9105-d1f50170bbc&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179257338-897c61bc-6599-4cc6-b1a0-63133bbc9adc.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=179&amp;id=u6167c899&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=268&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=27505&amp;status=error&amp;style=none&amp;taskId=uaeea7242-b1b6-4cdd-a6c2-6b7ed4be291&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179433581-0ff0ff4c-43db-43fc-8ccc-3667a1ebd591.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=84&amp;id=u4565715e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=126&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=22657&amp;status=error&amp;style=none&amp;taskId=u529608ac-8509-4f5d-808e-c01e9ef4c33&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/jpeg/22965877/1664179519434-e760067b-91d8-4107-9781-29ef676b433b.jpeg#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;id=u0d09a1fa&amp;margin=%5Bobject%20Object%5D&amp;originHeight=203&amp;originWidth=294&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=error&amp;style=none&amp;taskId=uc7e424b4-f33b-4085-9ddc-33507f81b82&amp;title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664180344246-9f8a9527-83c7-4a0b-8674-e6f77100b14c.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=352&amp;id=u81a6c59e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=528&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=19622&amp;status=error&amp;style=none&amp;taskId=ud454b649-ac0b-4b8e-96cb-562842e1bb6&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664180729499-b6addd9a-774d-40ab-9da7-64faecfb44b3.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=127&amp;id=ue8713a51&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=190&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17247&amp;status=error&amp;style=none&amp;taskId=udc107536-7b22-4b3e-b2da-e15806091ab&amp;title=&amp;width=606.6666666666666">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664181851947-55cbdebc-58c1-4dc3-bda9-1dacf04b1f8e.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=167&amp;id=u44a55c51&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=250&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=24326&amp;status=error&amp;style=none&amp;taskId=u4953087a-025c-43ad-a968-5afad727374&amp;title=&amp;width=606.6666666666666">
+<meta property="article:published_time" content="2022-12-13T16:20:14.223Z">
+<meta property="article:modified_time" content="2022-12-13T16:27:03.444Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664173457233-8f3bac2e-73da-4964-97b3-bd6b25e668d9.png#clientId=u001af5af-791f-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=151&amp;id=u10316498&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=227&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17847&amp;status=error&amp;style=none&amp;taskId=ue119a302-28a0-47b8-96c6-fa5ea49d058&amp;title=&amp;width=606.6666666666666">
+
+<link rel="canonical" href="http://metosakura.github.io/post/Git%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Git的基础操作 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://metosakura.github.io/post/Git%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git的基础操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-12-14 00:20:14 / Modified: 00:27:03" itemprop="dateCreated datePublished" datetime="2022-12-14T00:20:14+08:00">2022-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、本地仓库的创建与操作"><a href="#一、本地仓库的创建与操作" class="headerlink" title="一、本地仓库的创建与操作"></a>一、本地仓库的创建与操作</h1><h2 id="1-版本库的创建"><a href="#1-版本库的创建" class="headerlink" title="1.版本库的创建"></a>1.版本库的创建</h2><blockquote>
+<p>版本库又名仓库，英文名<strong>repository</strong>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以还原。</p>
+</blockquote>
+<h3 id="1-进入到目标目录"><a href="#1-进入到目标目录" class="headerlink" title="1.进入到目标目录"></a>1.进入到目标目录</h3><pre><code> 采用cd + “目标目录”&lt;br /&gt;![image.png](https://cdn.nlark.com/yuque/0/2022/png/22965877/1664173030470-233a1e81-2ab1-4a1e-ab89-3bd1b57c5495.png#clientId=u001af5af-791f-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=71&amp;id=ud14298f2&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=106&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=6426&amp;status=error&amp;style=none&amp;taskId=ue367f056-603c-4445-8dc3-8bbd6376919&amp;title=&amp;width=606.6666666666666)&lt;br /&gt;返回上一级目录操作为 cd..
+</code></pre>
+<h3 id="2-建立版本库"><a href="#2-建立版本库" class="headerlink" title="2.建立版本库"></a>2.建立版本库</h3><p>1）先 mkdir + “仓库名称”创建一个空文件夹<br>2）再使用“git init”使得该文件夹成为一个可受Git操作的版本库<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664173457233-8f3bac2e-73da-4964-97b3-bd6b25e668d9.png#clientId=u001af5af-791f-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=151&amp;id=u10316498&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=227&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17847&amp;status=error&amp;style=none&amp;taskId=ue119a302-28a0-47b8-96c6-fa5ea49d058&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+<h2 id="2-基础的Git操作"><a href="#2-基础的Git操作" class="headerlink" title="2.基础的Git操作"></a>2.基础的Git操作</h2><h3 id="1-add及commit操作"><a href="#1-add及commit操作" class="headerlink" title="1.add及commit操作"></a>1.add及commit操作</h3><pre><code> 首先我们创建一个txt文件（touch readme.txt）&lt;br /&gt; 	![image.png](https://cdn.nlark.com/yuque/0/2022/png/22965877/1664177478129-8fbe7806-91b0-4cd0-ba1a-0c33de30936d.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=194&amp;id=u1eadd32b&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=291&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=22616&amp;status=error&amp;style=none&amp;taskId=u9c455460-3ef3-4a98-a1be-fbc468d5d41&amp;title=&amp;width=606.6666666666666)
+</code></pre>
+<blockquote>
+<p>若要对txt文件进行操作可以使用 “vi readme.txt” 进入编辑器，按 i 进入编辑模式，按esc退出，再按 :wq 可进行保存，若要查看文件的内容，可以使用 “cat readme.txt”</p>
+</blockquote>
+<p>接下来将readme.txt添加到缓存区（add），再提交至仓库（commit）<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178534381-d6b69bac-d8a9-4523-8e72-84e3d40f8f1e.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=295&amp;id=u454e410d&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=443&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=35287&amp;status=error&amp;style=none&amp;taskId=uf747b831-73e7-467f-9ef6-51703400191&amp;title=&amp;width=606.6666666666666" alt="image.png"><br>其中 git commit -m “…” 中，引号内的内容即对本次操作的一个命名</p>
+<h3 id="2-修改文件"><a href="#2-修改文件" class="headerlink" title="2.修改文件"></a>2.修改文件</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178042560-0f8461ba-fbf8-49e2-9a4e-688fb72df2d4.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=164&amp;id=ufca0509d&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=246&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=24043&amp;status=error&amp;style=none&amp;taskId=u8007624e-b23f-45e2-87f2-e9794e5636e&amp;title=&amp;width=606.6666666666666" alt="image.png"><br>经过修改后可以看到红色字那一行提示readme.txt已经被修改了<br>而使用 git diff 可以让我们知道具体修改了哪些内容<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178234970-04b0f6e3-b1be-4d7b-b13c-a5226c48b45b.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=152&amp;id=u85f0562f&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=228&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=21503&amp;status=error&amp;style=none&amp;taskId=u09e6eeff-5c61-4a7c-92ba-28cfc7c5c7e&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+<h3 id="3-版本回退"><a href="#3-版本回退" class="headerlink" title="3.版本回退"></a>3.版本回退</h3><p>1）使用 git log 查看历史记录<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664178879957-8c230ea1-11eb-4d1e-b26f-5ee505a5226c.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=263&amp;id=ub141a65e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=394&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=37880&amp;status=error&amp;style=none&amp;taskId=ucf9fbb26-380a-4549-a286-540820b3a67&amp;title=&amp;width=606.6666666666666" alt="image.png"><br>2）把readme.txt回退到上一个版本，也就是”this  is the second modification”的那个版本，怎么做呢？在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^。现在，我们要把当前版本”this  is the third modification”回退到上一个版本”this  is the second modification”，就可以使用git reset命令：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179182219-ae57965b-3de9-4308-8159-05e849c1277a.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=125&amp;id=u78ef5bd9&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=188&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=19126&amp;status=error&amp;style=none&amp;taskId=u7fc73134-4b29-4076-9105-d1f50170bbc&amp;title=&amp;width=606.6666666666666" alt="image.png"><br>此时readme.txt的内容已经回到了上一个版本的内容<br>通过git log查看仓库的状态<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179257338-897c61bc-6599-4cc6-b1a0-63133bbc9adc.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=179&amp;id=u6167c899&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=268&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=27505&amp;status=error&amp;style=none&amp;taskId=uaeea7242-b1b6-4cdd-a6c2-6b7ed4be291&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+<blockquote>
+<p>若想回到未来的版本，我们可以先用 git reflog找到未来版本的commit id（其中 git reflog是用来查看之前进行过的操作）<br>     <img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664179433581-0ff0ff4c-43db-43fc-8ccc-3667a1ebd591.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=84&amp;id=u4565715e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=126&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=22657&amp;status=error&amp;style=none&amp;taskId=u529608ac-8509-4f5d-808e-c01e9ef4c33&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+</blockquote>
+<p>“git reset –hard…” 的实质其实就是改变Head的指向，Head指向哪里，当前版本就定位在哪里<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/22965877/1664179519434-e760067b-91d8-4107-9781-29ef676b433b.jpeg#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;id=u0d09a1fa&amp;margin=%5Bobject%20Object%5D&amp;originHeight=203&amp;originWidth=294&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=error&amp;style=none&amp;taskId=uc7e424b4-f33b-4085-9ddc-33507f81b82&amp;title="></p>
+<h3 id="4-撤销修改"><a href="#4-撤销修改" class="headerlink" title="4.撤销修改"></a>4.撤销修改</h3><p>当你对文件内容进行修改后，发现所修改的内容是不必要的，这时就可以通过 git checkout –file 来撤销之前的操作：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664180344246-9f8a9527-83c7-4a0b-8674-e6f77100b14c.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=352&amp;id=u81a6c59e&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=528&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=19622&amp;status=error&amp;style=none&amp;taskId=ud454b649-ac0b-4b8e-96cb-562842e1bb6&amp;title=&amp;width=606.6666666666666" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664180729499-b6addd9a-774d-40ab-9da7-64faecfb44b3.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=127&amp;id=ue8713a51&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=190&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=17247&amp;status=error&amp;style=none&amp;taskId=udc107536-7b22-4b3e-b2da-e15806091ab&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+<h3 id="5-删除文件"><a href="#5-删除文件" class="headerlink" title="5.删除文件"></a>5.删除文件</h3><p>删除操作可以使用 rm file 或者 git rm file<br>直观的来讲，git rm 删除过的文件，执行 git commit -m “abc” 提交时，会自动将删除该文件的操作提交上去（git 把删除文件这件事记录到缓冲区）<br>而用 rm 命令直接删除的文件，单纯执行 git commit -m “abc” 提交时，则不会将删除该文件的操作提交上去<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22965877/1664181851947-55cbdebc-58c1-4dc3-bda9-1dacf04b1f8e.png#clientId=ue5253e98-4a80-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;errorMessage=unknown%20error&amp;from=paste&amp;height=167&amp;id=u44a55c51&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=250&amp;originWidth=910&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=24326&amp;status=error&amp;style=none&amp;taskId=u4953087a-025c-43ad-a968-5afad727374&amp;title=&amp;width=606.6666666666666" alt="image.png"></p>
+<h3 id="6-版本号管理"><a href="#6-版本号管理" class="headerlink" title="6.版本号管理"></a>6.版本号管理</h3><p>命令格式：<br><code>$ git tag &lt;name&gt; &lt;commit_id&gt;</code></p>
+<h1 id="二、远程仓库操作"><a href="#二、远程仓库操作" class="headerlink" title="二、远程仓库操作"></a>二、远程仓库操作</h1><h2 id="1-github的账号创建及SSH的设置"><a href="#1-github的账号创建及SSH的设置" class="headerlink" title="1.github的账号创建及SSH的设置"></a>1.github的账号创建及SSH的设置</h2><p>详情访问：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/337959303">https://zhuanlan.zhihu.com/p/337959303</a></p>
+<h2 id="2-本地仓库与远程仓库连接"><a href="#2-本地仓库与远程仓库连接" class="headerlink" title="2.本地仓库与远程仓库连接"></a>2.本地仓库与远程仓库连接</h2><h2 id="3-push、pull及clone"><a href="#3-push、pull及clone" class="headerlink" title="3.push、pull及clone"></a>3.push、pull及clone</h2><h3 id="1-push"><a href="#1-push" class="headerlink" title="1.push"></a>1.push</h3><p>git push 使用本地的分支来对远程仓库的分支进行更新<br><code>$ git push&lt;远程主机名&gt;&lt;本地分支名&gt;:&lt;远程分支名&gt;</code><br>1）如果省略远程分支名，则表示将本地分支推送与之存在”追踪关系”的远程分支(通常两者同名)，如果该远程分支不存在，则会被新建。<br>2）如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支，这条命令是删除远程master分支。</p>
+<pre><code>$ git push origin :master
+# 等同于
+$ git push origin --delete master
+</code></pre>
+<p>3） 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push。<br><code>$ git push -u origin master</code><br>上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。不带任何参数的git push，默认只推送当前分支，这叫做simple方式。</p>
+<h3 id="2-pull"><a href="#2-pull" class="headerlink" title="2.pull"></a>2.pull</h3><p>git pull 命令是从远程获取最新版本到本地库，用于从另一个存储库或本地分支获取并集成整合。<br>命令格式：<br><code>$ git pull &lt;远程主机&gt;&lt;远程分支&gt;:&lt;本地分支&gt;</code><br>例如：<br><code>$ git pull origin master:my_test</code><br>如果省略本地分支，则将自动合并到当前所在分支上。</p>
+<h3 id="3-clone"><a href="#3-clone" class="headerlink" title="3.clone"></a>3.clone</h3><p>命令格式：<br><code>git clone git@github.com:MetoSakura/cxsj_Note</code></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/1.web%E6%9E%84%E5%BB%BA%E5%9F%BA%E7%A1%80.html" rel="prev" title="Web构建基础">
+      <i class="fa fa-chevron-left"></i> Web构建基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C.html" rel="next" title="文件操作">
+      文件操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">一、本地仓库的创建与操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%89%88%E6%9C%AC%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">1.版本库的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BF%9B%E5%85%A5%E5%88%B0%E7%9B%AE%E6%A0%87%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.进入到目标目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BB%BA%E7%AB%8B%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.建立版本库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9F%BA%E7%A1%80%E7%9A%84Git%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">2.基础的Git操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-add%E5%8F%8Acommit%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.add及commit操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.修改文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.版本号管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二、远程仓库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-github%E7%9A%84%E8%B4%A6%E5%8F%B7%E5%88%9B%E5%BB%BA%E5%8F%8ASSH%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">1.github的账号创建及SSH的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">2.本地仓库与远程仓库连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-push%E3%80%81pull%E5%8F%8Aclone"><span class="nav-number">2.3.</span> <span class="nav-text">3.push、pull及clone</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-push"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-pull"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.pull</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-clone"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.clone</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
